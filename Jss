@@ -1,0 +1,35 @@
+let timer;
+let running = false;
+let time = 0;
+
+function start() {
+  if (!running) {
+    running = true;
+    timer = setInterval(updateDisplay, 1000);
+  }
+}
+
+function stop() {
+  running = false;
+  clearInterval(timer);
+}
+
+function reset() {
+  running = false;
+  clearInterval(timer);
+  time = 0;
+  document.getElementById("display").innerHTML = "00:00:00";
+}
+
+function updateDisplay() {
+  time++;
+  let hours = Math.floor(time / 3600);
+  let minutes = Math.floor((time % 3600) / 60);
+  let seconds = time % 60;
+
+  hours = hours < 10 ? '0' + hours : hours;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+
+  document.getElementById("display").innerHTML = `${hours}:${minutes}:${seconds}`;
+}
